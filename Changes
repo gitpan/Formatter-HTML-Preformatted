@@ -1,5 +1,10 @@
 Revision history for Perl extension Formatter::HTML::Preformatted.
 
+0.93 Thu Jan 27 21:19:20 CET 2005
+	- Upgraded to the latest spec, v0.93.
+		* We now return arrayrefs for links,
+		* and add a charset.
+
 0.92 Wed Jan 26 16:33:05 CET 2005
 	- Upgraded to conform with the Formatter spec, v0.92
 	- Rewrote the test suite

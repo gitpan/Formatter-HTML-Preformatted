@@ -1,8 +1,8 @@
-Formatter-HTML-Preformatted version 0.92
+Formatter-HTML-Preformatted version 0.93
 ========================================
 
 This module conforms to the Formatter API Specification, version
-0.92. The specification itself can be found in the Formatter module on
+0.93. The specification itself can be found in the Formatter module on
 CPAN. 
 
 This formatter is very simple, it only takes a block of plain text,

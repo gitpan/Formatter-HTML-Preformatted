@@ -25,8 +25,11 @@ _EOD_
 
 
 my $docexpected = <<'_EOD_';
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
 <body>
 <pre>
 This is a test of Formatter::HTML::Preformatted, which can be found at
@@ -44,11 +47,11 @@ my $text = Formatter::HTML::Preformatted->format($data);
 isa_ok( $text, 'Formatter::HTML::Preformatted' );
 
 ok($text->fragment eq $fragexpected, 'Fragment comes out as expected');
-ok($text->document eq $docexpected, 'Document comes out as expected');
+ok($text->document('iso-8859-1') eq $docexpected, 'Document comes out as expected');
 
-ok(my @links = $text->links, 'Assigning links');
+ok(my $links = $text->links, 'Assigning links');
 
 
-ok($links[0]->{uri} eq 'http://search.cpan.org/dist/Formatter-HTML-Preformatted/', 'Link 1');
+ok(${$links}[0]->{uri} eq 'http://search.cpan.org/dist/Formatter-HTML-Preformatted/', 'Link 1');
 
-ok($links[1]->{uri} eq 'http://www.kjetil.kjernsmo.net/', 'Link 2');
+ok(${$links}[1]->{uri} eq 'http://www.kjetil.kjernsmo.net/', 'Link 2');

@@ -6,7 +6,7 @@ use warnings;
 use URI::Find::Simple qw( list_uris change_uris );
 
 
-our $VERSION = '0.92';
+our $VERSION = '0.93';
 
 =head1 NAME
 
@@ -18,7 +18,7 @@ Formatter::HTML::Preformatted - Absolute minimal HTML formatting of pure text
   my $formatter = Formatter::HTML::Preformatted->format($data);
   print $formatter->fragment;
   my @links = $text->links;
-  print $links[0]->{uri};
+  print ${$links}[0]->{uri};
 
 =head1 DESCRIPTION
 
@@ -29,15 +29,15 @@ hyperlinks.
 
 =head1 METHODS
 
-This module conforms with the L<Formatter> API specification, version 0.92:
+This module conforms with the L<Formatter> API specification, version 0.93:
 
 =over
 
 =item C<format($string)>
 
 The format function that you call to initialise the formatter. It
-takes the plain text as a string argument and returns a string with
-HTML.
+takes the plain text as a string argument and returns an object of
+this class.
 
 =cut
 
@@ -69,22 +69,32 @@ sub fragment {
   return "<pre>\n" . change_uris($raw, sub { "<a href=\"$_[0]\">$_[0]</a>" }) . "\n</pre>\n";
 }
 
-=item C<document>
+=item C<document([$charset])>
 
 Will add a document type declaration and some minimal markup, to
-return a full, valid, HTML document.
+return a full, valid, HTML document. You may specify an optional
+C<$charset> parameter. This will include a HTML C<meta> element with
+the chosen character set. It will still be your responsibility to
+ensure that the document served is encoded with this character set.
 
 =cut
 
 sub document {
   my $self = shift;
-  return '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">' . "\n<html>\n<body>\n" . $self->fragment . "\n</body>\n</html>\n";
+  my $result = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">' . "\n<html>\n";
+  my $charset = shift;
+  if ($charset) {
+    $result .= "<head>\n" . '<meta http-equiv="Content-Type" content="text/html; charset=' . $charset . '">' . "\n</head>\n";
+  }
+  $result .= "<body>\n" . $self->fragment . "\n</body>\n</html>\n";
+  return $result;
 }
 
 
 =item C<links>
 
-Will return all links found the input plain text string as a list.
+Will return all links found the input plain text string. They will be
+found in an arrayref where each element has a key C<uri>.
 
 =cut
 
@@ -94,7 +104,7 @@ sub links {
   foreach (list_uris($self->{_text})) {
     push(@arr, {uri => $_, title => ''});
   }
-  return @arr;
+  return \@arr;
 }
 
 =item C<title>
