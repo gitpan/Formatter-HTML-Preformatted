@@ -1,0 +1,6 @@
+PreRevision history for Perl extension Formatter::HTML::Preformatted.
+
+0.01  Thu Sep 30 15:13:28 2004
+	- original version; created by h2xs 1.23 with options
+Preformatted		-AX -b 5.6.0 -n Formatter::HTML::Preformatted
+

@@ -1,0 +1,29 @@
+Formatter-HTML-Preformatted version 0.1
+=======================================
+
+This module simply takes a block of plain text, possibly with some
+URIs in line, slaps pre-elements around it and makes hyperlinks of the
+URIs. 
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module depends heavily on URI::Find::Simple to do its hard work.
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2004 by Kjetil Kjernsmo
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.4 or,
+at your option, any later version of Perl 5 you may have available.
+
+
