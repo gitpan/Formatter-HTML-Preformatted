@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More tests => 7;
 
 use_ok ('Formatter::HTML::Preformatted');
 
@@ -12,7 +12,7 @@ It has been written by http://www.kjetil.kjernsmo.net/ in the hope
 it will be useful for someone.
 _EOD_
 
-my $expected = <<'_EOD_';
+my $fragexpected = <<'_EOD_';
 <pre>
 This is a test of Formatter::HTML::Preformatted, which can be found at
 <a href="http://search.cpan.org/dist/Formatter-HTML-Preformatted/">http://search.cpan.org/dist/Formatter-HTML-Preformatted/</a>
@@ -22,15 +22,33 @@ it will be useful for someone.
 </pre>
 _EOD_
 
-my $text = Formatter::HTML::Preformatted->new;
+
+
+my $docexpected = <<'_EOD_';
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<body>
+<pre>
+This is a test of Formatter::HTML::Preformatted, which can be found at
+<a href="http://search.cpan.org/dist/Formatter-HTML-Preformatted/">http://search.cpan.org/dist/Formatter-HTML-Preformatted/</a>
+It has been written by <a href="http://www.kjetil.kjernsmo.net/">http://www.kjetil.kjernsmo.net/</a> in the hope
+it will be useful for someone.
+
+</pre>
+
+</body>
+</html>
+_EOD_
+
+my $text = Formatter::HTML::Preformatted->format($data);
 isa_ok( $text, 'Formatter::HTML::Preformatted' );
 
-# Hrmpf! I can't get the below test working, anybody able to see why?
-#ok($text->format($data) eq $expected);
+ok($text->fragment eq $fragexpected, 'Fragment comes out as expected');
+ok($text->document eq $docexpected, 'Document comes out as expected');
 
-my @links = qw( http://search.cpan.org/dist/Formatter-HTML-Preformatted/ http://www.kjetil.kjernsmo.net/ );
-
-# TODO: Make this prettier:
-ok(join('', $text->links($data)), join('', @links));
+ok(my @links = $text->links, 'Assigning links');
 
 
+ok($links[0]->{uri} eq 'http://search.cpan.org/dist/Formatter-HTML-Preformatted/', 'Link 1');
+
+ok($links[1]->{uri} eq 'http://www.kjetil.kjernsmo.net/', 'Link 2');

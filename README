@@ -1,13 +1,18 @@
-Formatter-HTML-Preformatted version 0.1
-=======================================
+Formatter-HTML-Preformatted version 0.92
+========================================
 
-This module simply takes a block of plain text, possibly with some
-URIs in line, slaps pre-elements around it and makes hyperlinks of the
-URIs. 
+This module conforms to the Formatter API Specification, version
+0.92. The specification itself can be found in the Formatter module on
+CPAN. 
+
+This formatter is very simple, it only takes a block of plain text,
+possibly with some URIs in line, slaps pre-elements around it and
+makes hyperlinks of the URIs.
 
 INSTALLATION
 
-To install this module type the following:
+To install this module use the cpan or cpanplus tools or type the
+following:
 
    perl Makefile.PL
    make
@@ -20,7 +25,7 @@ This module depends heavily on URI::Find::Simple to do its hard work.
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2004 by Kjetil Kjernsmo
+Copyright (C) 2004-2005 by Kjetil Kjernsmo
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.4 or,
