@@ -1,5 +1,9 @@
 Revision history for Perl extension Formatter::HTML::Preformatted.
 
+0.95 Sat Nov 20 00:05:23 CET 2005
+         - Fixed a spec violation (duh!) bug, I had used uri instead of
+	url.
+
 0.93 Thu Jan 27 21:19:20 CET 2005
 	- Upgraded to the latest spec, v0.93.
 		* We now return arrayrefs for links,

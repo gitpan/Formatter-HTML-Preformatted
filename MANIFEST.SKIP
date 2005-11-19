@@ -7,4 +7,6 @@
 tar.gz$
 .bak$
 .tmp$
+^.svn/
+/.svn/
 t/03escaping.t

@@ -6,7 +6,7 @@ use warnings;
 use URI::Find::Simple qw( list_uris change_uris );
 
 
-our $VERSION = '0.93';
+our $VERSION = '0.95';
 
 =head1 NAME
 
@@ -18,7 +18,7 @@ Formatter::HTML::Preformatted - Absolute minimal HTML formatting of pure text
   my $formatter = Formatter::HTML::Preformatted->format($data);
   print $formatter->fragment;
   my @links = $text->links;
-  print ${$links}[0]->{uri};
+  print ${$links}[0]->{url};
 
 =head1 DESCRIPTION
 
@@ -29,7 +29,7 @@ hyperlinks.
 
 =head1 METHODS
 
-This module conforms with the L<Formatter> API specification, version 0.93:
+This module conforms with the L<Formatter> API specification, version 0.95:
 
 =over
 
@@ -94,7 +94,7 @@ sub document {
 =item C<links>
 
 Will return all links found the input plain text string. They will be
-found in an arrayref where each element has a key C<uri>.
+found in an arrayref where each element has a key C<url>.
 
 =cut
 
@@ -102,7 +102,7 @@ sub links {
   my $self = shift;
   my @arr;
   foreach (list_uris($self->{_text})) {
-    push(@arr, {uri => $_, title => ''});
+    push(@arr, {url => $_, title => ''});
   }
   return \@arr;
 }

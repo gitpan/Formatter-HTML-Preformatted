@@ -52,6 +52,6 @@ ok($text->document('iso-8859-1') eq $docexpected, 'Document comes out as expecte
 ok(my $links = $text->links, 'Assigning links');
 
 
-ok(${$links}[0]->{uri} eq 'http://search.cpan.org/dist/Formatter-HTML-Preformatted/', 'Link 1');
+ok(${$links}[0]->{url} eq 'http://search.cpan.org/dist/Formatter-HTML-Preformatted/', 'Link 1');
 
-ok(${$links}[1]->{uri} eq 'http://www.kjetil.kjernsmo.net/', 'Link 2');
+ok(${$links}[1]->{url} eq 'http://www.kjetil.kjernsmo.net/', 'Link 2');
